@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>ConciseOS · 轻简操作系统</title>
+    <!-- 引入Google Fonts提升质感 -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <!-- Font Awesome 6 图标库 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(145deg, #f9fafc 0%, #f1f5f9 100%);
+            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 1.5rem;
+            scroll-behavior: smooth;
+        }
+
+        .glass-card {
+            max-width: 1100px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.92);
+            border-radius: 2rem;
+            box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.02), inset 0 1px 0 rgba(255,255,255,0.6);
+            padding: 2.5rem 2rem;
+            transition: transform 0.25s ease, box-shadow 0.3s ease;
+            border: 1px solid rgba(255,255,255,0.7);
+        }
+
+        .glass-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 28px 38px -14px rgba(0, 0, 0, 0.12);
+        }
+
+        .hero-title {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .hero-title h1 {
+            font-size: 3.2rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #1E2B3C, #2C3E50);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            letter-spacing: -0.5px;
+            margin-bottom: 0.5rem;
+            animation: fadeSlideUp 0.7s cubic-bezier(0.2, 0.9, 0.4, 1.1) forwards;
+            opacity: 0;
+            transform: translateY(16px);
+        }
+
+        .hero-tag {
+            font-size: 1.1rem;
+            color: #5c6f87;
+            font-weight: 450;
+            background: rgba(100, 116, 139, 0.1);
+            display: inline-block;
+            padding: 0.2rem 1rem;
+            border-radius: 40px;
+            backdrop-filter: blur(2px);
+            animation: fadeSlideUp 0.7s 0.1s forwards;
+            opacity: 0;
+            transform: translateY(12px);
+        }
+
+        .welcome-message {
+            text-align: center;
+            margin: 1rem 0 2rem 0;
+        }
+
+        .welcome-message p {
+            font-size: 1.8rem;
+            font-weight: 500;
+            color: #1f2a3e;
+            background: linear-gradient(120deg, #1f2a3e, #2d3e5a);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            letter-spacing: -0.3px;
+            animation: glowFade 1s ease-out forwards;
+            opacity: 0;
+            animation-delay: 0.2s;
+        }
+
+        .button-group {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.8rem;
+            margin: 2.5rem 0 1.2rem 0;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.65rem;
+            padding: 0.9rem 2rem;
+            font-size: 1.1rem;
+            font-weight: 550;
+            border-radius: 60px;
+            background: white;
+            color: #1e2f41;
+            text-decoration: none;
+            transition: all 0.25s ease;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+            backdrop-filter: blur(4px);
+            cursor: pointer;
+            letter-spacing: -0.2px;
+            font-family: inherit;
+        }
+
+        .btn-primary {
+            background: #ffffff;
+            border-color: #cbd5e1;
+            color: #1e293b;
+            box-shadow: 0 5px 12px rgba(0,0,0,0.02);
+        }
+
+        .btn-primary i {
+            color: #3b82f6;
+            transition: transform 0.2s;
+        }
+
+        .btn-primary:hover {
+            background: #f8fafc;
+            border-color: #94a3b8;
+            transform: translateY(-3px);
+            box-shadow: 0 12px 20px -10px rgba(59,130,246,0.2);
+        }
+
+        .btn-secondary {
+            background: #fefefe;
+            border-color: #e2e8f0;
+            color: #334155;
+        }
+
+        .btn-secondary i {
+            color: #8b5cf6;
+        }
+
+        .btn-secondary:hover {
+            background: #f5f3ff;
+            border-color: #c4b5fd;
+            transform: translateY(-3px);
+            box-shadow: 0 12px 20px -10px rgba(139,92,246,0.15);
+        }
+
+        .btn-download {
+            background: #eff6ff;
+            border-color: #bfdbfe;
+            color: #1e40af;
+            font-weight: 600;
+        }
+
+        .btn-download i {
+            color: #2563eb;
+        }
+
+        .btn-download:hover {
+            background: #dbeafe;
+            border-color: #93c5fd;
+            transform: translateY(-3px);
+            box-shadow: 0 12px 20px -12px #3b82f6;
+        }
+
+        .info-section {
+            margin-top: 3rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.8rem;
+            justify-content: center;
+            border-top: 1px solid rgba(203, 213, 225, 0.5);
+            padding-top: 2rem;
+        }
+
+        .info-card {
+            flex: 1;
+            min-width: 240px;
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(2px);
+            border-radius: 1.5rem;
+            padding: 1.5rem 1rem;
+            transition: all 0.2s ease-in-out;
+            border: 1px solid rgba(226, 232, 240, 0.8);
+            text-align: center;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.02);
+        }
+
+        .info-card:hover {
+            transform: scale(1.01);
+            background: rgba(255,255,255,0.9);
+            border-color: #cbd5e1;
+            box-shadow: 0 12px 22px -12px rgba(0,0,0,0.08);
+        }
+
+        .info-card i {
+            font-size: 2.3rem;
+            margin-bottom: 1rem;
+            color: #3b82f6;
+        }
+
+        .info-card h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: #0f172a;
+        }
+
+        .info-card p {
+            color: #334155;
+            font-size: 0.95rem;
+            line-height: 1.4;
+            margin-top: 0.25rem;
+        }
+
+        .dev-signature {
+            margin-top: 0.75rem;
+            font-size: 0.9rem;
+            color: #5b6e8c;
+            font-weight: 500;
+        }
+
+        .download-note {
+            background: #f1f5f9;
+            border-radius: 2rem;
+            padding: 0.5rem 1.2rem;
+            display: inline-block;
+            font-size: 0.85rem;
+            margin-top: 1rem;
+            color: #2c3e66;
+        }
+
+        @keyframes fadeSlideUp {
+            0% {
+                opacity: 0;
+                transform: translateY(18px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes glowFade {
+            0% {
+                opacity: 0;
+                text-shadow: 0 0 0 rgba(100,108,255,0);
+            }
+            60% {
+                opacity: 0.9;
+            }
+            100% {
+                opacity: 1;
+                text-shadow: 0 2px 6px rgba(0,0,0,0.02);
+            }
+        }
+
+        .btn {
+            animation: btnPop 0.45s cubic-bezier(0.2, 0.9, 0.4, 1.2) forwards;
+            opacity: 0;
+            transform: scale(0.96);
+        }
+
+        .btn:nth-child(1) { animation-delay: 0.25s; }
+        .btn:nth-child(2) { animation-delay: 0.35s; }
+        .btn:nth-child(3) { animation-delay: 0.45s; }
+
+        @keyframes btnPop {
+            0% {
+                opacity: 0;
+                transform: scale(0.92);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @media (max-width: 680px) {
+            .glass-card {
+                padding: 1.8rem 1.2rem;
+            }
+            .hero-title h1 {
+                font-size: 2.2rem;
+            }
+            .welcome-message p {
+                font-size: 1.3rem;
+            }
+            .button-group {
+                gap: 1rem;
+            }
+            .btn {
+                padding: 0.7rem 1.4rem;
+                font-size: 0.95rem;
+            }
+            .info-card h3 {
+                font-size: 1.3rem;
+            }
+        }
+
+        .toast-msg {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) scale(0.9);
+            background: #1e293bdd;
+            backdrop-filter: blur(12px);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 60px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            z-index: 999;
+            opacity: 0;
+            transition: opacity 0.2s ease, transform 0.2s;
+            pointer-events: none;
+            white-space: nowrap;
+            font-family: monospace;
+            letter-spacing: 0.3px;
+            box-shadow: 0 10px 20px -5px rgba(0,0,0,0.2);
+        }
+        .toast-msg.show {
+            opacity: 1;
+            transform: translateX(-50%) scale(1);
+        }
+        footer {
+            text-align: center;
+            margin-top: 2rem;
+            font-size: 0.75rem;
+            color: #7f8c9a;
+        }
+        a {
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="glass-card">
+    <div class="hero-title">
+        <h1>ConciseOS官网</h1>
+        <div class="hero-tag">
+            <i class="fas fa-feather-alt" style="margin-right: 6px;"></i> 极简 · 流畅 · 新生代
+        </div>
+    </div>
+
+    <div class="welcome-message">
+        <p>✨ 欢迎访问ConciseOS官网！ ✨</p>
+    </div>
+
+    <div class="button-group">
+        <a href="javascript:void(0);" class="btn btn-primary" id="infoTeamBtn">
+            <i class="fas fa-users"></i> 工作室与开发者信息
+        </a>
+        <a href="javascript:void(0);" class="btn btn-secondary" id="aboutSoftwareBtn">
+            <i class="fas fa-info-circle"></i> 关于软件
+        </a>
+        <a href="javascript:void(0);" class="btn btn-download" id="downloadBtn">
+            <i class="fas fa-download"></i> 下载点这里
+        </a>
+    </div>
+
+    <div class="info-section">
+        <div class="info-card" id="studioCard">
+            <i class="fas fa-laptop-code"></i>
+            <h3>✨ Conecise Studio</h3>
+            <p>一支致力于打造轻量、高效、隐私优先操作系统的年轻团队。</p>
+            <div class="dev-signature">
+                <i class="fas fa-user-astronaut"></i> 核心开发者:张皓  代码的结构与修复：感谢各大AI
+            </div>
+        </div>
+        <div class="info-card" id="aboutCard">
+            <i class="fas fa-cogs"></i>
+            <h3>📦 关于 ConciseOS</h3>
+            <p>基于Python3内核深度定制，极简交互，资源占用降低20%，完美适配现代开发流。</p>
+            <div class="download-note">
+                <i class="fas fa-arrow-down"></i> 当前版本: v6.1.0  |  稳定构建: 2026.05.10
+            </div>
+        </div>
+        <div class="info-card" id="downloadInfoCard">
+            <i class="fas fa-cloud-download-alt"></i>
+            <h3>📥 下载软件</h3>
+            <p>支持Windows7以上(x32/x64)支持Macbook(自研芯片)不支持其他</p>
+            <div style="margin-top: 0.6rem; font-size:0.85rem; color:#3b82f6;">
+                <i class="fas fa-shield-alt"></i> 校验哈希已提供
+            </div>
+        </div>
+    </div>
+    <footer>
+        © 2024~2026 ConciseOS 开源项目 | 简而不凡，轻而致远
+    </footer>
+</div>
+
+<script>
+    (function() {
+        // ========== 配置区域（您只需要修改这里）==========
+        // 请在这里填写您的下载跳转网址（支持任何合法URL）
+        const DOWNLOAD_URL = 'https://wwbgk.lanzouu.com/iToWk3p96vlg';   // ← 在这里更换您的下载链接
+        // 如果您想更改弹窗提示文字，也可以修改下面的变量
+        const DOWNLOAD_PASSWORD_HINT = '🔐 密码为：1234\n\n请自行前往下载页面获取文件。\n点击“确定”跳转到下载站。';
+        // ===============================================
+
+        const toast = document.createElement('div');
+        toast.className = 'toast-msg';
+        document.body.appendChild(toast);
+
+        function showMessage(msg, duration = 2200) {
+            toast.textContent = msg;
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, duration);
+        }
+
+        const teamBtn = document.getElementById('infoTeamBtn');
+        const aboutBtn = document.getElementById('aboutSoftwareBtn');
+        const downloadBtn = document.getElementById('downloadBtn');
+
+        if (teamBtn) {
+            teamBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                showMessage('✨ 工作室: Conecise Studio · 开发者:张皓 开源贡献者们 ✨', 2500);
+                const studioCard = document.getElementById('studioCard');
+                if (studioCard) {
+                    studioCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    studioCard.style.transition = 'background 0.3s';
+                    studioCard.style.backgroundColor = '#eef2ff';
+                    setTimeout(() => {
+                        studioCard.style.backgroundColor = '';
+                    }, 800);
+                }
+                console.log('[ConciseOS] 查看工作室与开发者信息');
+            });
+        }
+
+        if (aboutBtn) {
+            aboutBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                showMessage('📖 ConciseOS — 基于Python3内核，专注简洁与高效。文档中心即将开放，敬请期待！', 2800);
+                const aboutCard = document.getElementById('aboutCard');
+                if (aboutCard) {
+                    aboutCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    aboutCard.style.transition = 'background 0.25s';
+                    aboutCard.style.backgroundColor = '#eef2ff';
+                    setTimeout(() => {
+                        aboutCard.style.backgroundColor = '';
+                    }, 800);
+                }
+            });
+        }
+
+        // 下载按钮：使用配置区域的 DOWNLOAD_URL
+        if (downloadBtn) {
+            downloadBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                const userConfirmed = confirm(DOWNLOAD_PASSWORD_HINT);
+                if (userConfirmed) {
+                    // 跳转到您配置的网址（当前页面跳转/新标签页模式可选）
+                    // 默认在新标签页打开（避免覆盖官网），如需当前页面跳转，将 '_blank' 改为 '_self'
+                    window.open(DOWNLOAD_URL, '_blank');
+                    showMessage('正在打开下载页面，请稍后...', 1500);
+                } else {
+                    showMessage('已取消下载，可稍后再次尝试', 1500);
+                }
+                const downloadCard = document.getElementById('downloadInfoCard');
+                if (downloadCard) {
+                    downloadCard.style.transform = 'scale(1.02)';
+                    downloadCard.style.transition = 'transform 0.2s';
+                    setTimeout(() => {
+                        downloadCard.style.transform = '';
+                    }, 400);
+                }
+                console.log('[下载] 用户点击下载按钮，目标网址: ' + DOWNLOAD_URL);
+            });
+        }
+
+        const studioCardDiv = document.getElementById('studioCard');
+        if (studioCardDiv) {
+            studioCardDiv.style.cursor = 'pointer';
+            studioCardDiv.addEventListener('click', () => {
+                showMessage('👥 工作室成员: 创始人兼核心开发者 张皓', 2000);
+            });
+        }
+        const aboutCardDiv = document.getElementById('aboutCard');
+        if (aboutCardDiv) {
+            aboutCardDiv.style.cursor = 'pointer';
+            aboutCardDiv.addEventListener('click', () => {
+                showMessage('🔍 ConciseOS 特色: 无广告/ 秒级启动 / 优雅的圆角设计', 2400);
+            });
+        }
+        const downloadInfoDiv = document.getElementById('downloadInfoCard');
+        if (downloadInfoDiv) {
+            downloadInfoDiv.style.cursor = 'pointer';
+            downloadInfoDiv.addEventListener('click', () => {
+                showMessage('📀 下载前请记住密码: 1234', 2300);
+            });
+        }
+
+        const allInfoCards = document.querySelectorAll('.info-card');
+        allInfoCards.forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transition = 'all 0.2s';
+            });
+        });
+    })();
+</script>
+</body>
+</html>
