@@ -4,17 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <title>ConciseOS · 轻简操作系统</title>
-    <!-- 引入Google Fonts提升质感 (可选，不影响结构) -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
-    <!-- Font Awesome 6 (免费图标库，用于按钮装饰，纯视觉增强) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             background: linear-gradient(145deg, #f9fafc 0%, #f1f5f9 100%);
             font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, sans-serif;
@@ -25,7 +18,6 @@
             padding: 2rem 1.5rem;
             scroll-behavior: smooth;
         }
-
         .glass-card {
             max-width: 1100px;
             width: 100%;
@@ -36,22 +28,15 @@
             transition: transform 0.25s ease, box-shadow 0.3s ease;
             border: 1px solid rgba(255,255,255,0.7);
         }
-
         .glass-card:hover {
             transform: translateY(-4px);
             box-shadow: 0 28px 38px -14px rgba(0, 0, 0, 0.12);
         }
-
-        .hero-title {
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-
+        .hero-title { text-align: center; margin-bottom: 2rem; }
         .hero-title h1 {
             font-size: 3.2rem;
             font-weight: 700;
             background: linear-gradient(135deg, #1E2B3C, #2C3E50);
-            background-clip: text;
             -webkit-background-clip: text;
             color: transparent;
             letter-spacing: -0.5px;
@@ -60,7 +45,6 @@
             opacity: 0;
             transform: translateY(16px);
         }
-
         .hero-tag {
             font-size: 1.1rem;
             color: #5c6f87;
@@ -69,23 +53,15 @@
             display: inline-block;
             padding: 0.2rem 1rem;
             border-radius: 40px;
-            backdrop-filter: blur(2px);
             animation: fadeSlideUp 0.7s 0.1s forwards;
             opacity: 0;
             transform: translateY(12px);
         }
-
-        .welcome-message {
-            text-align: center;
-            margin: 1rem 0 2rem 0;
-        }
-
+        .welcome-message { text-align: center; margin: 1rem 0 2rem 0; }
         .welcome-message p {
             font-size: 1.8rem;
             font-weight: 500;
-            color: #1f2a3e;
             background: linear-gradient(120deg, #1f2a3e, #2d3e5a);
-            background-clip: text;
             -webkit-background-clip: text;
             color: transparent;
             letter-spacing: -0.3px;
@@ -93,7 +69,6 @@
             opacity: 0;
             animation-delay: 0.2s;
         }
-
         .button-group {
             display: flex;
             flex-wrap: wrap;
@@ -101,7 +76,6 @@
             gap: 1.8rem;
             margin: 2.5rem 0 1.2rem 0;
         }
-
         .btn {
             display: inline-flex;
             align-items: center;
@@ -117,66 +91,61 @@
             transition: all 0.25s ease;
             border: 1px solid #e2e8f0;
             box-shadow: 0 2px 6px rgba(0,0,0,0.02);
-            backdrop-filter: blur(4px);
             cursor: pointer;
             letter-spacing: -0.2px;
             font-family: inherit;
         }
-
         .btn-primary {
             background: #ffffff;
             border-color: #cbd5e1;
             color: #1e293b;
-            box-shadow: 0 5px 12px rgba(0,0,0,0.02);
         }
-
-        .btn-primary i {
-            color: #3b82f6;
-            transition: transform 0.2s;
-        }
-
+        .btn-primary i { color: #3b82f6; transition: transform 0.2s; }
         .btn-primary:hover {
             background: #f8fafc;
             border-color: #94a3b8;
             transform: translateY(-3px);
             box-shadow: 0 12px 20px -10px rgba(59,130,246,0.2);
         }
-
         .btn-secondary {
             background: #fefefe;
             border-color: #e2e8f0;
             color: #334155;
         }
-
-        .btn-secondary i {
-            color: #8b5cf6;
-        }
-
+        .btn-secondary i { color: #8b5cf6; }
         .btn-secondary:hover {
             background: #f5f3ff;
             border-color: #c4b5fd;
             transform: translateY(-3px);
             box-shadow: 0 12px 20px -10px rgba(139,92,246,0.15);
         }
-
         .btn-download {
             background: #eff6ff;
             border-color: #bfdbfe;
             color: #1e40af;
             font-weight: 600;
         }
-
-        .btn-download i {
-            color: #2563eb;
-        }
-
+        .btn-download i { color: #2563eb; }
         .btn-download:hover {
             background: #dbeafe;
             border-color: #93c5fd;
             transform: translateY(-3px);
             box-shadow: 0 12px 20px -12px #3b82f6;
         }
-
+        .btn-pro {
+            background: linear-gradient(105deg, #fff9e8, #ffefd6);
+            border-color: #fbbf24;
+            color: #b45309;
+            font-weight: 700;
+            box-shadow: 0 6px 14px rgba(245,158,11,0.15);
+        }
+        .btn-pro i { color: #f59e0b; }
+        .btn-pro:hover {
+            background: linear-gradient(105deg, #fff3e0, #ffe6c7);
+            border-color: #f59e0b;
+            transform: translateY(-3px);
+            box-shadow: 0 16px 24px -12px #f59e0b;
+        }
         .info-section {
             margin-top: 3rem;
             display: flex;
@@ -186,12 +155,10 @@
             border-top: 1px solid rgba(203, 213, 225, 0.5);
             padding-top: 2rem;
         }
-
         .info-card {
             flex: 1;
             min-width: 240px;
             background: rgba(255, 255, 255, 0.75);
-            backdrop-filter: blur(2px);
             border-radius: 1.5rem;
             padding: 1.5rem 1rem;
             transition: all 0.2s ease-in-out;
@@ -199,41 +166,16 @@
             text-align: center;
             box-shadow: 0 3px 8px rgba(0,0,0,0.02);
         }
-
         .info-card:hover {
             transform: scale(1.01);
             background: rgba(255,255,255,0.9);
             border-color: #cbd5e1;
             box-shadow: 0 12px 22px -12px rgba(0,0,0,0.08);
         }
-
-        .info-card i {
-            font-size: 2.3rem;
-            margin-bottom: 1rem;
-            color: #3b82f6;
-        }
-
-        .info-card h3 {
-            font-size: 1.5rem;
-            font-weight: 600;
-            margin-bottom: 0.75rem;
-            color: #0f172a;
-        }
-
-        .info-card p {
-            color: #334155;
-            font-size: 0.95rem;
-            line-height: 1.4;
-            margin-top: 0.25rem;
-        }
-
-        .dev-signature {
-            margin-top: 0.75rem;
-            font-size: 0.9rem;
-            color: #5b6e8c;
-            font-weight: 500;
-        }
-
+        .info-card i { font-size: 2.3rem; margin-bottom: 1rem; color: #3b82f6; }
+        .info-card h3 { font-size: 1.5rem; font-weight: 600; margin-bottom: 0.75rem; color: #0f172a; }
+        .info-card p { color: #334155; font-size: 0.95rem; line-height: 1.4; margin-top: 0.25rem; }
+        .dev-signature { margin-top: 0.75rem; font-size: 0.9rem; color: #5b6e8c; font-weight: 500; }
         .download-note {
             background: #f1f5f9;
             border-radius: 2rem;
@@ -243,75 +185,36 @@
             margin-top: 1rem;
             color: #2c3e66;
         }
-
         @keyframes fadeSlideUp {
-            0% {
-                opacity: 0;
-                transform: translateY(18px);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            0% { opacity: 0; transform: translateY(18px); }
+            100% { opacity: 1; transform: translateY(0); }
         }
-
         @keyframes glowFade {
-            0% {
-                opacity: 0;
-                text-shadow: 0 0 0 rgba(100,108,255,0);
-            }
-            60% {
-                opacity: 0.9;
-            }
-            100% {
-                opacity: 1;
-                text-shadow: 0 2px 6px rgba(0,0,0,0.02);
-            }
+            0% { opacity: 0; text-shadow: 0 0 0 rgba(100,108,255,0); }
+            60% { opacity: 0.9; }
+            100% { opacity: 1; text-shadow: 0 2px 6px rgba(0,0,0,0.02); }
         }
-
         .btn {
             animation: btnPop 0.45s cubic-bezier(0.2, 0.9, 0.4, 1.2) forwards;
             opacity: 0;
             transform: scale(0.96);
         }
-
-        .btn:nth-child(1) { animation-delay: 0.25s; }
-        .btn:nth-child(2) { animation-delay: 0.35s; }
-        .btn:nth-child(3) { animation-delay: 0.45s; }
-
+        .btn:nth-child(1) { animation-delay: 0.2s; }
+        .btn:nth-child(2) { animation-delay: 0.3s; }
+        .btn:nth-child(3) { animation-delay: 0.4s; }
+        .btn:nth-child(4) { animation-delay: 0.5s; }
         @keyframes btnPop {
-            0% {
-                opacity: 0;
-                transform: scale(0.92);
-            }
-            100% {
-                opacity: 1;
-                transform: scale(1);
-            }
+            0% { opacity: 0; transform: scale(0.92); }
+            100% { opacity: 1; transform: scale(1); }
         }
-
         @media (max-width: 680px) {
-            .glass-card {
-                padding: 1.8rem 1.2rem;
-            }
-            .hero-title h1 {
-                font-size: 2.2rem;
-            }
-            .welcome-message p {
-                font-size: 1.3rem;
-            }
-            .button-group {
-                gap: 1rem;
-            }
-            .btn {
-                padding: 0.7rem 1.4rem;
-                font-size: 0.95rem;
-            }
-            .info-card h3 {
-                font-size: 1.3rem;
-            }
+            .glass-card { padding: 1.8rem 1.2rem; }
+            .hero-title h1 { font-size: 2.2rem; }
+            .welcome-message p { font-size: 1.3rem; }
+            .button-group { gap: 1rem; }
+            .btn { padding: 0.7rem 1.4rem; font-size: 0.9rem; }
+            .info-card h3 { font-size: 1.3rem; }
         }
-
         .toast-msg {
             position: fixed;
             bottom: 30px;
@@ -333,19 +236,9 @@
             letter-spacing: 0.3px;
             box-shadow: 0 10px 20px -5px rgba(0,0,0,0.2);
         }
-        .toast-msg.show {
-            opacity: 1;
-            transform: translateX(-50%) scale(1);
-        }
-        footer {
-            text-align: center;
-            margin-top: 2rem;
-            font-size: 0.75rem;
-            color: #7f8c9a;
-        }
-        a {
-            text-decoration: none;
-        }
+        .toast-msg.show { opacity: 1; transform: translateX(-50%) scale(1); }
+        footer { text-align: center; margin-top: 2rem; font-size: 0.75rem; color: #7f8c9a; }
+        a { text-decoration: none; }
     </style>
 </head>
 <body>
@@ -369,8 +262,13 @@
         <a href="javascript:void(0);" class="btn btn-secondary" id="aboutSoftwareBtn">
             <i class="fas fa-info-circle"></i> 关于软件
         </a>
-        <a href="javascript:void(0);" class="btn btn-download" id="downloadBtn">
+        <!-- ===== 修改这里：直接下载本地文件 ===== -->
+        <a href="dfile/main.exe" download="ConciseOS.exe" class="btn btn-download" id="downloadBtn">
             <i class="fas fa-download"></i> 下载点这里
+        </a>
+        <!-- ====================================== -->
+        <a href="COS-Pro.html" class="btn btn-pro" id="proBtn">
+            <i class="fas fa-crown"></i> 订阅/下载Pro
         </a>
     </div>
 
@@ -388,7 +286,7 @@
             <h3>📦 关于 ConciseOS</h3>
             <p>基于Python3内核深度定制，极简交互，资源占用降低20%，完美适配现代开发流。</p>
             <div class="download-note">
-                <i class="fas fa-arrow-down"></i> 当前版本: v6.1.0  |  稳定构建: 2026.05.10
+                <i class="fas fa-arrow-down"></i> 对不起，下载已停用 | 稳定构建: 2026.05.10
             </div>
         </div>
         <div class="info-card" id="downloadInfoCard">
@@ -407,13 +305,6 @@
 
 <script>
     (function() {
-        // ========== 配置区域（您只需要修改这里）==========
-        // 请在这里填写您的下载跳转网址（支持任何合法URL）
-        const DOWNLOAD_URL = 'https://wwbgk.lanzouu.com/iToWk3p96vlg';   // ← 在这里更换您的下载链接
-        // 如果您想更改弹窗提示文字，也可以修改下面的变量
-        const DOWNLOAD_PASSWORD_HINT = '🔐 密码为：1234\n\n请自行前往下载页面获取文件。\n点击“确定”跳转到下载站。';
-        // ===============================================
-
         const toast = document.createElement('div');
         toast.className = 'toast-msg';
         document.body.appendChild(toast);
@@ -421,9 +312,7 @@
         function showMessage(msg, duration = 2200) {
             toast.textContent = msg;
             toast.classList.add('show');
-            setTimeout(() => {
-                toast.classList.remove('show');
-            }, duration);
+            setTimeout(() => { toast.classList.remove('show'); }, duration);
         }
 
         const teamBtn = document.getElementById('infoTeamBtn');
@@ -439,11 +328,8 @@
                     studioCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
                     studioCard.style.transition = 'background 0.3s';
                     studioCard.style.backgroundColor = '#eef2ff';
-                    setTimeout(() => {
-                        studioCard.style.backgroundColor = '';
-                    }, 800);
+                    setTimeout(() => { studioCard.style.backgroundColor = ''; }, 800);
                 }
-                console.log('[ConciseOS] 查看工作室与开发者信息');
             });
         }
 
@@ -456,37 +342,27 @@
                     aboutCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
                     aboutCard.style.transition = 'background 0.25s';
                     aboutCard.style.backgroundColor = '#eef2ff';
-                    setTimeout(() => {
-                        aboutCard.style.backgroundColor = '';
-                    }, 800);
+                    setTimeout(() => { aboutCard.style.backgroundColor = ''; }, 800);
                 }
             });
         }
 
-        // 下载按钮：使用配置区域的 DOWNLOAD_URL
+        // ===== 修改这里：下载按钮逻辑 =====
         if (downloadBtn) {
             downloadBtn.addEventListener('click', (e) => {
-                e.preventDefault();
-                const userConfirmed = confirm(DOWNLOAD_PASSWORD_HINT);
-                if (userConfirmed) {
-                    // 跳转到您配置的网址（当前页面跳转/新标签页模式可选）
-                    // 默认在新标签页打开（避免覆盖官网），如需当前页面跳转，将 '_blank' 改为 '_self'
-                    window.open(DOWNLOAD_URL, '_blank');
-                    showMessage('正在打开下载页面，请稍后...', 1500);
-                } else {
-                    showMessage('已取消下载，可稍后再次尝试', 1500);
-                }
+                // 由于设置了 download 属性，浏览器会自动下载
+                // 这里只加提示，不阻止默认行为
+                showMessage('📥 开始下载 ConciseOS...', 2000);
+                
                 const downloadCard = document.getElementById('downloadInfoCard');
                 if (downloadCard) {
                     downloadCard.style.transform = 'scale(1.02)';
                     downloadCard.style.transition = 'transform 0.2s';
-                    setTimeout(() => {
-                        downloadCard.style.transform = '';
-                    }, 400);
+                    setTimeout(() => { downloadCard.style.transform = ''; }, 400);
                 }
-                console.log('[下载] 用户点击下载按钮，目标网址: ' + DOWNLOAD_URL);
             });
         }
+        // ==================================
 
         const studioCardDiv = document.getElementById('studioCard');
         if (studioCardDiv) {
@@ -499,7 +375,7 @@
         if (aboutCardDiv) {
             aboutCardDiv.style.cursor = 'pointer';
             aboutCardDiv.addEventListener('click', () => {
-                showMessage('🔍 ConciseOS 特色: 无广告/ 秒级启动 / 优雅的圆角设计', 2400);
+                showMessage('🔍 ConciseOS 特色: 无广告/ 秒级启动 / 优雅的圆角设计 & 原生Wayland支持', 2400);
             });
         }
         const downloadInfoDiv = document.getElementById('downloadInfoCard');
@@ -512,10 +388,15 @@
 
         const allInfoCards = document.querySelectorAll('.info-card');
         allInfoCards.forEach(card => {
-            card.addEventListener('mouseenter', () => {
-                card.style.transition = 'all 0.2s';
-            });
+            card.addEventListener('mouseenter', () => { card.style.transition = 'all 0.2s'; });
         });
+        
+        const proLink = document.getElementById('proBtn');
+        if (proLink) {
+            proLink.addEventListener('click', () => {
+                showMessage('✨ 跳转至 ConciseOS Pro 专属页面 ✨', 1200);
+            });
+        }
     })();
 </script>
 </body>
