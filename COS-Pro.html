@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>ConciseOS Pro · 专业版订阅</title>
+    <!-- Google Fonts & Font Awesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(145deg, #f9fafc 0%, #eff3f8 100%);
+            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 1.5rem;
+            scroll-behavior: smooth;
+        }
+
+        /* 主卡片 */
+        .glass-card {
+            max-width: 1200px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 2rem;
+            box-shadow: 0 25px 40px -12px rgba(0, 0, 0, 0.12);
+            padding: 2rem 2rem;
+            transition: transform 0.25s ease;
+            border: 1px solid rgba(255,255,255,0.8);
+        }
+
+        .pro-badge {
+            display: inline-block;
+            background: linear-gradient(120deg, #f59e0b, #d97706);
+            color: white;
+            font-weight: 700;
+            font-size: 0.85rem;
+            padding: 0.3rem 1rem;
+            border-radius: 40px;
+            margin-left: 12px;
+            vertical-align: middle;
+            letter-spacing: 0.5px;
+            box-shadow: 0 2px 8px rgba(245,158,11,0.2);
+        }
+
+        .hero-title h1 {
+            font-size: 2.6rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #1E2B3C, #2C3E50);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+
+        /* 登录面板 */
+        .login-panel {
+            max-width: 460px;
+            margin: 2rem auto;
+            background: #f8fafc;
+            border-radius: 1.5rem;
+            padding: 2rem 2rem;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.02);
+            border: 1px solid #e2edf2;
+            transition: all 0.2s;
+        }
+
+        .input-group {
+            margin-bottom: 1.2rem;
+            text-align: left;
+        }
+
+        .input-group label {
+            font-weight: 500;
+            color: #1e293b;
+            display: block;
+            margin-bottom: 0.4rem;
+            font-size: 0.9rem;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border-radius: 60px;
+            border: 1px solid #cbd5e1;
+            font-size: 1rem;
+            outline: none;
+            transition: 0.2s;
+            background: white;
+        }
+
+        .input-group input:focus {
+            border-color: #f59e0b;
+            box-shadow: 0 0 0 3px rgba(245,158,11,0.2);
+        }
+
+        .btn-login {
+            background: #f59e0b;
+            color: white;
+            border: none;
+            width: 100%;
+            padding: 0.8rem;
+            border-radius: 60px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: 0.2s;
+            margin-top: 0.5rem;
+        }
+
+        .btn-login:hover {
+            background: #d97706;
+            transform: translateY(-2px);
+        }
+
+        /* 购买卡片 (未购买时展示) */
+        .pricing-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            justify-content: center;
+            margin: 2rem 0;
+        }
+        .price-card {
+            background: white;
+            border-radius: 1.5rem;
+            padding: 1.5rem 1.8rem;
+            flex: 1;
+            min-width: 180px;
+            box-shadow: 0 8px 18px rgba(0,0,0,0.04);
+            border: 1px solid #eef2f6;
+            transition: 0.2s;
+            cursor: pointer;
+            text-align: center;
+        }
+        .price-card:hover {
+            transform: translateY(-6px);
+            border-color: #f59e0b;
+            box-shadow: 0 18px 28px -12px rgba(245,158,11,0.25);
+        }
+        .price-card h3 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #f59e0b;
+        }
+        .price-card .price {
+            font-size: 2rem;
+            font-weight: 800;
+            margin: 0.8rem 0;
+        }
+        .price-card p {
+            color: #475569;
+        }
+        .select-plan {
+            background: #f59e0b10;
+            border: 1px solid #f59e0b;
+            margin-top: 1rem;
+            border-radius: 60px;
+            padding: 0.4rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #d97706;
+        }
+        .pro-features {
+            margin-top: 2rem;
+            background: #fefce8;
+            border-radius: 1.2rem;
+            padding: 1rem;
+        }
+        .pay-btn {
+            background: #f59e0b;
+            color: white;
+            border: none;
+            padding: 0.9rem 2rem;
+            border-radius: 60px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            margin-top: 1rem;
+        }
+        /* Pro内容区域 (购买后) */
+        .pro-content {
+            margin-top: 2rem;
+        }
+        .download-area {
+            background: #f1f5f9;
+            border-radius: 1.5rem;
+            padding: 1.8rem;
+            text-align: center;
+        }
+        .pro-download-btn {
+            background: #f59e0b;
+            color: white;
+            padding: 0.9rem 2.5rem;
+            border-radius: 60px;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            font-weight: 700;
+            margin-top: 0.8rem;
+        }
+        .toast-msg {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #1e293bdd;
+            backdrop-filter: blur(12px);
+            color: white;
+            padding: 0.6rem 1.4rem;
+            border-radius: 60px;
+            font-size: 0.85rem;
+            z-index: 999;
+            opacity: 0;
+            transition: 0.2s;
+            pointer-events: none;
+        }
+        .toast-msg.show {
+            opacity: 1;
+        }
+        .info-card {
+            background: rgba(255,255,240,0.7);
+            border-radius: 1.2rem;
+            padding: 1rem;
+            text-align: center;
+        }
+        footer {
+            text-align: center;
+            margin-top: 2rem;
+            font-size: 0.75rem;
+            color: #6c7a91;
+        }
+        button {
+            font-family: inherit;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 1rem;
+            color: #f59e0b;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        hr {
+            margin: 1rem 0;
+        }
+        .error-msg {
+            color: #dc2626;
+            font-size: 0.8rem;
+            margin-top: 0.2rem;
+        }
+    </style>
+</head>
+<body>
+
+<div class="glass-card" id="appRoot">
+    <!-- 简易返回主页链接 -->
+    <a href="index.html" class="back-link"><i class="fas fa-arrow-left"></i> 返回 ConciseOS 官网</a>
+
+    <!-- 标题区 + Pro标识 -->
+    <div class="hero-title">
+        <h1>ConciseOS <span class="pro-badge"><i class="fas fa-crown"></i> PRO</span></h1>
+        <div class="hero-tag" style="color:#b45309; margin-top:0.5rem;">
+            <i class="fas fa-gem"></i> 专业版 · 解锁全部性能与专属工具
+        </div>
+    </div>
+
+    <!-- 动态渲染区域：根据登录状态和购买状态展示不同内容 -->
+    <div id="dynamicPanel">
+        <!-- 初始加载: 未登录界面 -->
+        <div class="login-panel" id="loginPanel">
+            <i class="fas fa-mobile-alt" style="font-size: 2rem; color:#f59e0b; margin-bottom: 0.5rem; display:block; text-align:center"></i>
+            <h3 style="text-align:center; margin-bottom:1rem;">Pro已停用</h3>
+            <div class="input-group">
+                <label><i class="fas fa-phone-alt"></i> 等待开发者解锁</label>
+                <input type="tel" id="phoneInput" placeholder="请输入11位手机号" maxlength="11">
+            </div>
+            <button class="btn-login" id="doLoginBtn"><i class="fas fa-sign-in-alt"></i> 登录 / 检测订阅</button>
+        </div>
+    </div>
+    <footer>
+        © 2024~2026 ConciseOS Pro | 专业版享受优先支持与独家功能
+    </footer>
+</div>
+
+<div id="toastMsg" class="toast-msg"></div>
+
+<script>
+    (function() {
+        // ---------- 模拟数据库购买状态 ----------
+        // 我们以演示逻辑: 手机号若以 "VIP2024" 或后6位 "202403" 代表已购买Pro (模拟)
+        // 同时为了方便测试，也可以用特定手机号: 18888888888 视为已购买
+        // 符合需求: 检测用户是否购买Pro; 未购买则展示付款页面, 购买后展示Pro内容.
+        
+        // 存储当前用户手机号与购买状态 (session内)
+        let currentUser = {
+            phone: null,
+            isPro: false
+        };
+        
+        // 模拟已购买用户列表 (后台校验)
+        function checkPurchaseStatus(phone) {
+            // 规则1: 手机号后6位 === "202403" → 已购买
+            // 规则2: 手机号 === "13912345678" 测试专用已购买
+            if (!phone) return false;
+            if (phone === "---") return true;
+            if (phone.slice(-6) === "---") return true;
+            // 也可额外写死部分测试号
+            if (phone === "---") return true;
+            return false;
+        }
+        
+        // 展示界面路由器
+        const dynamicContainer = document.getElementById('dynamicPanel');
+        const showToast = (msg, duration = 2500) => {
+            const toast = document.getElementById('toastMsg');
+            toast.textContent = msg;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), duration);
+        };
+        
+        // 渲染未登录界面 (其实登录界面已存在，但为了防止重复渲染先定义)
+        function renderLogin() {
+            dynamicContainer.innerHTML = `
+                <div class="login-panel" id="loginPanel">
+                    <i class="fas fa-mobile-alt" style="font-size: 2rem; color:#f59e0b; margin-bottom: 0.5rem; display:block; text-align:center"></i>
+                    <h3 style="text-align:center; margin-bottom:1rem;">Pro已停用</h3>
+                    <div class="input-group">
+                        <label><i class="fas fa-phone-alt"></i> 请等待开发者解锁</label>
+                        <input type="tel" id="phoneInput" placeholder="请输入11位手机号" maxlength="11">
+                    </div>
+                    <button class="btn-login" id="doLoginBtn"><i class="fas fa-sign-in-alt"></i> 登录 / 检测订阅</button>
+                    <p style="font-size: 0.7rem; text-align:center; margin-top:1rem; color:#6b7280;">演示模式：手机号后6位为"202403"或13912345678模拟已购买Pro</p>
+                </div>
+            `;
+            const loginBtn = document.getElementById('doLoginBtn');
+            const phoneInput = document.getElementById('phoneInput');
+            if (loginBtn) {
+                loginBtn.addEventListener('click', () => {
+                    const phoneVal = phoneInput.value.trim();
+                    if (!phoneVal || !/^\d{11}$/.test(phoneVal)) {
+                        showToast('❌ 请输入有效的11位手机号码');
+                        return;
+                    }
+                    // 检测购买状态
+                    const hasPro = checkPurchaseStatus(phoneVal);
+                    currentUser.phone = phoneVal;
+                    currentUser.isPro = hasPro;
+                    if (hasPro) {
+                        // 已购买 => 跳转到Pro页面内容 (需求第2点)
+                        renderProContent();
+                        showToast(`✅ 欢迎回来，Pro会员！`, 1800);
+                    } else {
+                        // 未购买 => 展示付款页面 (价格卡片)
+                        renderPaymentPlans();
+                        showToast(`📱 ${phoneVal} 未订阅Pro，请选择套餐`, 2000);
+                    }
+                });
+            }
+        }
+        
+        // 渲染未购买套餐页面 (价格选项)
+        function renderPaymentPlans() {
+            dynamicContainer.innerHTML = `
+                <div style="margin: 1rem 0;">
+                    <div style="background: #fff7ed; border-radius: 1.2rem; padding: 1rem; text-align:center; margin-bottom:0.5rem;">
+                        <i class="fas fa-star-of-life" style="color:#f59e0b;"></i> <strong>尚未解锁专业版</strong><br>
+                        选择订阅计划，即刻享受 ConciseOS Pro 全部特性
+                    </div>
+                    <div class="pricing-grid" id="pricingGrid">
+                        <div class="price-card" data-plan="month">
+                            <h3>月付</h3>
+                            <div class="price">￥10</div>
+                            <p>按月订阅，灵活自由</p>
+                            <div class="select-plan">选择套餐</div>
+                        </div>
+                        <div class="price-card" data-plan="quarter">
+                            <h3>季付</h3>
+                            <div class="price">￥25</div>
+                            <p>三个月 / 优惠价</p>
+                            <div class="select-plan">选择套餐</div>
+                        </div>
+                        <div class="price-card" data-plan="year">
+                            <h3>年付</h3>
+                            <div class="price">￥80</div>
+                            <p>最划算 / 年均仅￥80</p>
+                            <div class="select-plan">推荐</div>
+                        </div>
+                    </div>
+                    <div style="text-align:center; margin-top:1rem;">
+                        <button id="confirmPayBtn" class="pay-btn"><i class="fas fa-credit-card"></i> 前往支付 (演示付款)</button>
+                        <p style="font-size:0.7rem; margin-top:0.5rem;">* 支付后自动开通Pro权限，同一手机号将标记为已购买</p>
+                    </div>
+                </div>
+            `;
+            // 存储当前选中套餐
+            let selectedPlan = 'month';
+            const priceCards = document.querySelectorAll('.price-card');
+            priceCards.forEach(card => {
+                card.addEventListener('click', () => {
+                    priceCards.forEach(c => c.style.borderColor = '#eef2f6');
+                    card.style.borderColor = '#f59e0b';
+                    if (card.dataset.plan === 'month') selectedPlan = 'month';
+                    else if (card.dataset.plan === 'quarter') selectedPlan = 'quarter';
+                    else if (card.dataset.plan === 'year') selectedPlan = 'year';
+                    showToast(`已选中 ${card.querySelector('h3')?.innerText} 套餐`, 1000);
+                });
+            });
+            // 默认高亮月付
+            if(priceCards[0]) priceCards[0].style.borderColor = '#f59e0b';
+            
+            const payBtn = document.getElementById('confirmPayBtn');
+            if (payBtn) {
+                payBtn.addEventListener('click', () => {
+                    // 模拟付款流程, 根据选中套餐更新购买状态
+                    let priceDesc = '';
+                    if (selectedPlan === 'month') priceDesc = '10元/月';
+                    else if (selectedPlan === 'quarter') priceDesc = '25元/季';
+                    else priceDesc = '80元/年';
+                    showToast(`💳 演示支付 ${priceDesc} 成功！正在激活Pro会员...`, 2000);
+                    // 重要: 将当前用户的购买状态设为 true (模拟数据库更新)
+                    currentUser.isPro = true;
+                    // 满足需求: 购买后直接跳转到Pro页面内容 (第4点提到的Pro页面)
+                    setTimeout(() => {
+                        renderProContent();
+                        showToast(`🎉 恭喜！ConciseOS Pro 已激活，尽情享用专业功能`, 2500);
+                    }, 1500);
+                });
+            }
+        }
+        
+        // Pro页面内容（购买成功后显示的界面，包含Pro标注 + 下载地址（暂设为XXX.cn））
+        function renderProContent() {
+            dynamicContainer.innerHTML = `
+                <div class="pro-content">
+                    <div class="info-card" style="background: linear-gradient(115deg, #fff7e8, #fff2df); margin-bottom:1.5rem;">
+                        <i class="fas fa-check-circle" style="color:#f59e0b; font-size: 2rem;"></i>
+                        <h2 style="margin:0.5rem 0;">✨ 专业版特权已解锁 ✨</h2>
+                        <p>享受更高性能内核、专属技术支持、AI助手与高级安全模块。</p>
+                    </div>
+                    
+                    <!-- 类似主页的按钮区，但标注Pro风格 -->
+                    <div class="button-group" style="display: flex; flex-wrap:wrap; gap:1rem; justify-content:center; margin: 2rem 0;">
+                        <div class="btn" style="background:white; border-color:#f59e0b;">
+                            <i class="fas fa-users"></i> 工作室与开发者 (Pro)
+                        </div>
+                        <div class="btn" style="background:white; border-color:#f59e0b;">
+                            <i class="fas fa-info-circle"></i> 关于Pro软件
+                        </div>
+                    </div>
+                    
+                    <!-- 下载区域，地址先设为 XXX.cn 后续补充 -->
+                    <div class="download-area">
+                        <i class="fas fa-download" style="font-size: 2rem; color:#f59e0b;"></i>
+                        <h3>下载 ConciseOS Pro 版本</h3>
+                        <p>最新Pro专属镜像 · 独家优化组件</p>
+                        <a href="XXX.cn" class="pro-download-btn" id="proDownloadLink" target="_blank">
+                            <i class="fas fa-cloud-download-alt"></i> 立即下载 Pro 安装包
+                        </a>
+                        <p style="font-size:0.75rem; margin-top:12px;">* 下载地址暂为 XXX.cn，后续补充完整链接</p>
+                    </div>
+                    
+                    <!-- 附加额外信息与主页面风格类似 -->
+                    <div class="info-section" style="margin-top:2rem; display:flex; gap:1rem; flex-wrap:wrap;">
+                        <div class="info-card" style="flex:1;">
+                            <i class="fas fa-chart-line"></i>
+                            <h4>Pro 性能增强</h4>
+                            <p>内存占用再降15%，实时调度优化</p>
+                        </div>
+                        <div class="info-card" style="flex:1;">
+                            <i class="fas fa-headset"></i>
+                            <h4>优先支持</h4>
+                            <p>专属客服与开发者直接交流通道</p>
+                        </div>
+                        <div class="info-card" style="flex:1;">
+                            <i class="fas fa-layer-group"></i>
+                            <h4>独家主题+工具集</h4>
+                            <p>动态壁纸，专业级终端扩展</p>
+                        </div>
+                    </div>
+                    <div style="margin-top:1rem; text-align:right;">
+                        <button id="logoutProBtn" style="background:transparent; border:none; color:#f97316; cursor:pointer;"><i class="fas fa-exchange-alt"></i> 切换账号</button>
+                    </div>
+                </div>
+            `;
+            // 绑定下载地址点击提醒: 因为地址暂为XXX.cn，给出提示后续可自定义
+            const downloadProLink = document.getElementById('proDownloadLink');
+            if (downloadProLink) {
+                downloadProLink.addEventListener('click', (e) => {
+                    if (downloadProLink.getAttribute('href') === 'XXX.cn') {
+                        e.preventDefault();
+                        showToast('🔧 Pro 下载地址暂未配置，后续将会更新正式链接。感谢支持！', 2500);
+                    } else {
+                        // 正常跳转
+                        showToast('开始下载 ConciseOS Pro 版本', 1500);
+                    }
+                });
+            }
+            const logoutBtn = document.getElementById('logoutProBtn');
+            if (logoutBtn) {
+                logoutBtn.addEventListener('click', () => {
+                    // 退出登录，重置状态
+                    currentUser.phone = null;
+                    currentUser.isPro = false;
+                    renderLogin();
+                    showToast('已退出账号，回到登录页');
+                });
+            }
+        }
+        
+        // 增加一个小细节，如果用户购买后，再次直接刷新页面需要维持登录状态(仅会话内)，但在演示中为了简单，加载时默认显示登录面板。
+        // 初始化加载页面
+        renderLogin();
+        
+        // 提供额外的全局手动恢复: 但是上面的renderLogin已经绑定好事件。
+        // 另外可以根据需求支持记住当前会话? 考虑会话简单存储，刷新后丢失会话但符合演示预期。
+        // 同时为了满足"如果购买，跳转到4.提到" 即跳转到pro内容. 购买后调用renderProContent完全实现。
+        // 价格要求: 一个月10元 一个季25 一年80 已完全符合。
+        // Pro页面和主页面一样，并且标注Pro，下载地址先设为XXX.cn后续补充，已满足。
+        
+        // 如果用户再购买完成后，还可提供重新登录再次检测已购买，因为模拟数据检测函数会依赖手机号后缀；
+        // 但为了效果，购买成功后置currentUser.isPro = true，同一会话无需再次验证。符合体验。
+        // 但是需求包括检测用户是否购买Pro，登录时检测(通过手机号)。购买付款页成功后即记录为购买，后续再登录该手机号时因为checkPurchaseStatus固定逻辑会验证后6位，为了统一，为了让已支付用户再次登录也是Pro，我们需要在支付后把购买的手机号“记住”状态，但由于演示版没有后端，我们可以在支付时将当前手机号加入localStorage模拟已购列表。
+        // 为了完善体验: 让支付成功后，将当前手机号存入localStorage的已购白名单，从而使再次登录同号能直接进入Pro。
+        const markPhoneAsPurchased = (phone) => {
+            let purchasedList = localStorage.getItem('conciseos_pro_phones');
+            let arr = purchasedList ? JSON.parse(purchasedList) : [];
+            if (!arr.includes(phone)) {
+                arr.push(phone);
+                localStorage.setItem('conciseos_pro_phones', JSON.stringify(arr));
+            }
+        };
+        
+        const isPhonePurchasedLocal = (phone) => {
+            let purchasedList = localStorage.getItem('conciseos_pro_phones');
+            if (purchasedList) {
+                let arr = JSON.parse(purchasedList);
+                if (arr.includes(phone)) return true;
+            }
+            return checkPurchaseStatus(phone); // 兼容演示内置规则
+        };
+        
+        // 重写checkPurchaseStatus增强版，结合localStorage持久购买
+        window.checkProStatusExtended = (phone) => {
+            if (!phone) return false;
+            let localPurchased = localStorage.getItem('conciseos_pro_phones');
+            if (localPurchased) {
+                let arr = JSON.parse(localPurchased);
+                if (arr.includes(phone)) return true;
+            }
+            return checkPurchaseStatus(phone);
+        };
+        
+        // 修补登录逻辑，应用增强检测
+        const originalRenderLogin = renderLogin;
+        window.enhanceLogin = () => {
+            dynamicContainer.innerHTML = `
+                <div class="login-panel" id="loginPanel">
+                    <i class="fas fa-mobile-alt" style="font-size: 2rem; color:#f59e0b; margin-bottom: 0.5rem; display:block; text-align:center"></i>
+                    <h3 style="text-align:center; margin-bottom:1rem;">Pro已停用</h3>
+                    <div class="input-group">
+                        <label><i class="fas fa-phone-alt"></i> 请等待开发者解锁</label>
+                        <input type="tel" id="phoneInput" placeholder="请输入11位手机号" maxlength="11">
+                    </div>
+                    <button class="btn-login" id="doLoginBtn"><i class="fas fa-sign-in-alt"></i> 已停用</button>
+                </div>
+            `;
+            const loginBtn = document.getElementById('doLoginBtn');
+            const phoneInput = document.getElementById('phoneInput');
+            if (loginBtn) {
+                loginBtn.addEventListener('click', () => {
+                    const phoneVal = phoneInput.value.trim();
+                    if (!phoneVal || !/^\d{11}$/.test(phoneVal)) {
+                        showToast('❌ 无效的数据0x2332000');
+                        return;
+                    }
+                    const hasPro = window.checkProStatusExtended(phoneVal);
+                    currentUser.phone = phoneVal;
+                    currentUser.isPro = hasPro;
+                    if (hasPro) {
+                        renderProContent();
+                        showToast(`✅ Pro 会员欢迎回来！`, 1800);
+                    } else {
+                        renderPaymentPlansWithPhone(phoneVal);
+                        showToast(`📱 未订阅Pro，请选择套餐`, 2000);
+                    }
+                });
+            }
+        };
+        
+        function renderPaymentPlansWithPhone(phoneNumber) {
+            dynamicContainer.innerHTML = `
+                <div style="margin: 1rem 0;">
+                    <div style="background: #fff7ed; border-radius: 1.2rem; padding: 1rem; text-align:center;">
+                        <i class="fas fa-star-of-life"></i> <strong>尚未解锁专业版</strong><br>手机号: ${phoneNumber}
+                    </div>
+                    <div class="pricing-grid" id="pricingGrid">
+                        <div class="price-card" data-plan="month"><h3>月付</h3><div class="price">￥10</div><p>按月订阅</p><div class="select-plan">选择</div></div>
+                        <div class="price-card" data-plan="quarter"><h3>季付</h3><div class="price">￥25</div><p>季度优惠</p><div class="select-plan">选择</div></div>
+                        <div class="price-card" data-plan="year"><h3>年付</h3><div class="price">￥80</div><p>一年畅享</p><div class="select-plan">推荐</div></div>
+                    </div>
+                    <div style="text-align:center; margin-top:1rem;"><button id="confirmPayBtn" class="pay-btn">💳 立即支付并开通Pro</button></div>
+                </div>
+            `;
+            let selectedPlan = 'month';
+            const cards = document.querySelectorAll('.price-card');
+            cards.forEach(c => {
+                c.addEventListener('click', () => {
+                    cards.forEach(cd => cd.style.borderColor = '#eef2f6');
+                    c.style.borderColor = '#f59e0b';
+                    if (c.dataset.plan === 'month') selectedPlan = 'month';
+                    else if (c.dataset.plan === 'quarter') selectedPlan = 'quarter';
+                    else if (c.dataset.plan === 'year') selectedPlan = 'year';
+                });
+            });
+            if(cards[0]) cards[0].style.borderColor = '#f59e0b';
+            document.getElementById('confirmPayBtn')?.addEventListener('click', () => {
+                showToast(`支付成功 (${selectedPlan})，Pro已激活`, 1500);
+                markPhoneAsPurchased(phoneNumber);
+                currentUser.phone = phoneNumber;
+                currentUser.isPro = true;
+                renderProContent();
+            });
+        }
+        
+        // 替换全局渲染函数
+        renderLogin = window.enhanceLogin;
+        renderLogin();
+        
+        // 暴露支付标记
+        window.markPhoneAsPurchased = markPhoneAsPurchased;
+    })();
+</script>
+</body>
+</html>
