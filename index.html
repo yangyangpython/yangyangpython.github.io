@@ -1,4 +1,5 @@
-<!DOCTYPE html>
+
+html_content = '''<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
@@ -366,9 +367,9 @@
             align-items: center;
             justify-content: center;
             gap: 0.3rem;
+            flex-wrap: wrap;
         }
     </style>
-<base target="_blank">
 </head>
 <body>
 
@@ -438,25 +439,25 @@
         </div>
         <div class="cos-popup-title">选择下载方式</div>
         <div class="cos-popup-subtitle">ConciseOS 安装包（约 55MB）</div>
-
+        
         <div class="cos-popup-btn-group">
-            <a href="https://conciseos.lanzouu.com/iBmcP412zsab" target="_blank" class="cos-popup-btn cos-popup-btn-primary" id="cosBtnNetdisk">
+            <a href="https://conciseos.lanzouu.com/iBmcP412zsab" target="_blank" class="cos-popup-btn cos-popup-btn-primary">
                 <i class="fas fa-hdd"></i>
-                使用网盘源
+                网盘源
                 <span class="cos-popup-tag">推荐</span>
             </a>
-            <a href="https://ghproxy.com/https://github.com/yangyangpython/yangyangpython.github.io/releases/download/v1.0.0/main.exe" 
-               class="cos-popup-btn cos-popup-btn-secondary" id="cosBtnMirror">
+            <a href="https://github.com/yangyangpython/yangyangpython.github.io/releases/download/v1.0.0/main.exe" 
+               target="_blank" class="cos-popup-btn cos-popup-btn-secondary">
                 <i class="fas fa-bolt"></i>
-                使用镜像源
+                镜像源
             </a>
         </div>
-
+        
         <div class="cos-popup-note">
             <i class="fas fa-lock" style="font-size:0.7rem;"></i>
             网盘密码：COS
         </div>
-
+        
         <button class="cos-popup-btn cos-popup-btn-cancel" id="cosBtnCancel">
             取消
         </button>
@@ -575,4 +576,9 @@
 })();
 </script>
 </body>
-</html>
+</html>'''
+
+with open('/mnt/agents/output/index.html', 'w', encoding='utf-8') as f:
+    f.write(html_content)
+
+print("文件已保存")
