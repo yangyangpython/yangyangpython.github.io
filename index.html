@@ -1,5 +1,4 @@
-
-html_content = '''<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
@@ -367,9 +366,9 @@ html_content = '''<!DOCTYPE html>
             align-items: center;
             justify-content: center;
             gap: 0.3rem;
-            flex-wrap: wrap;
         }
     </style>
+<base target="_blank">
 </head>
 <body>
 
@@ -414,7 +413,7 @@ html_content = '''<!DOCTYPE html>
             <h3>📦 关于 ConciseOS</h3>
             <p>基于Python3内核深度定制，极简交互，资源占用降低20%，完美适配现代开发流。</p>
             <div class="download-note">
-                <i class="fas fa-arrow-down"></i> 网页使用GitHub源速度较慢，推荐网盘源 | 稳定构建: 2026.08.07 | 版本147
+                <i class="fas fa-arrow-down"></i> 对不起，下载已停用 | 稳定构建: 2026.05.10
             </div>
         </div>
         <div class="info-card" id="downloadInfoCard">
@@ -439,25 +438,25 @@ html_content = '''<!DOCTYPE html>
         </div>
         <div class="cos-popup-title">选择下载方式</div>
         <div class="cos-popup-subtitle">ConciseOS 安装包（约 55MB）</div>
-        
+
         <div class="cos-popup-btn-group">
-            <a href="https://conciseos.lanzouu.com/iBmcP412zsab" target="_blank" class="cos-popup-btn cos-popup-btn-primary">
+            <a href="https://conciseos.lanzouu.com/iBmcP412zsab" target="_blank" class="cos-popup-btn cos-popup-btn-primary" id="cosBtnNetdisk">
                 <i class="fas fa-hdd"></i>
-                网盘源
+                使用网盘源
                 <span class="cos-popup-tag">推荐</span>
             </a>
-            <a href="https://github.com/yangyangpython/yangyangpython.github.io/releases/download/v1.0.0/main.exe" 
-               target="_blank" class="cos-popup-btn cos-popup-btn-secondary">
+            <a href="https://ghproxy.com/https://github.com/yangyangpython/yangyangpython.github.io/releases/download/v1.0.0/main.exe" 
+               class="cos-popup-btn cos-popup-btn-secondary" id="cosBtnMirror">
                 <i class="fas fa-bolt"></i>
-                镜像源
+                使用镜像源
             </a>
         </div>
-        
+
         <div class="cos-popup-note">
             <i class="fas fa-lock" style="font-size:0.7rem;"></i>
             网盘密码：COS
         </div>
-        
+
         <button class="cos-popup-btn cos-popup-btn-cancel" id="cosBtnCancel">
             取消
         </button>
@@ -576,9 +575,4 @@ html_content = '''<!DOCTYPE html>
 })();
 </script>
 </body>
-</html>'''
-
-with open('/mnt/agents/output/index.html', 'w', encoding='utf-8') as f:
-    f.write(html_content)
-
-print("文件已保存")
+</html>
